@@ -13,7 +13,7 @@ export default {
     daisyui,
   ],
   daisyui: {
-    themes: ["dracula"],
+    themes: ["night"],
   },
 }
 
