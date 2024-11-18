@@ -1,34 +1,34 @@
-export default function TableList({ handleOpen}) {
+import axios from 'axios';
+import { useState } from 'react';
 
-    const clients = [
-        {
-            id: 1,
-            name: "Valderlan Silva",
-            email: "valderlanjosr15@gmail.com",
-            cargo: "Desenvolvedor",
-            rate: "100",
-            isactive: true
-        },
-        {
-            id: 2,
-            name: "Valderlan2 Silva",
-            email: "valderlanjosr16@gmail.com",
-            cargo: "Desenvolvedor2",
-            rate: "103",
-            isactive: true
-        },
-        {
-            id: 3,
-            name: "Valderlan3 Silva",
-            email: "valderlanjosr17@gmail.com",
-            cargo: "Desenvolvedor2",
-            rate: "102",
-            isactive: false
+export default function TableList({ handleOpen, searchTerm, tableData, setTableData}) {
+    const [error, setError] = useState(null);
+
+   
+
+    // Filtrar os dados de tableData com base em searchTerm
+    const filteredData = tableData.filter(client => 
+        client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        client.job.toLowerCase().includes(searchTerm.toLowerCase()) 
+    );
+
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('Tem certeza de que deseja excluir este cliente?');
+        if (confirmDelete) {
+            try {
+                await axios.delete(`http://localhost:3000/api/clients/${id}`);
+                setTableData((prevData) => prevData.filter(client => client.id !== id))
+            } catch (error) {
+                setError(error.message)
+            }
         }
-    ]
+    }
 
     return (
         <>
+            {error && <div className='alert alert-error'>{error}</div>}
+           
             <div className="overflow-x-auto mt-10">
                 <table className="table">
                     {/* head */}
@@ -44,12 +44,12 @@ export default function TableList({ handleOpen}) {
                     </thead>
                     <tbody className="hover">
                         {/* row 1 */}
-                        {clients.map((client) => (
-                            <tr>
+                        {filteredData.map((client) => (
+                            <tr key={client.id}>
                                 <th>{client.id}</th>
                                 <td>{client.name}</td>
                                 <td>{client.email}</td>
-                                <td>{client.cargo}</td>
+                                <td>{client.job}</td>
                                 <td>{client.rate}</td>
                                 <td>
                                     <button className={
@@ -61,12 +61,12 @@ export default function TableList({ handleOpen}) {
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleOpen('edit')} className="btn btn-secondary">
+                                    <button onClick={() => handleOpen('edit', client)} className="btn btn-secondary">
                                         Atualizar
                                     </button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-accent">
+                                    <button className="btn btn-accent" onClick={() => handleDelete(client.id)}>
                                         Deletar
                                     </button>
                                 </td>

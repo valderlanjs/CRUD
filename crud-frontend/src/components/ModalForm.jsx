@@ -1,21 +1,44 @@
+import { useEffect } from "react";
 import { useState } from "react";
 
-export default function ModalForm({ isOpen, onClose, mode, OnSubmit }) {
+export default function ModalForm({ isOpen, onClose, mode, OnSubmit, clientData }) {
     const [rate, setRate] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [job, setJob] = useState('');
     const [status, setStatus] = useState(false);
 
-    //handle the change of status
+    //Lidar com a mudança de status
     const handleStatusChange = (e) => {
-        setStatus(e.target.value === 'Ativo'); //set status as boolean
+        setStatus(e.target.value === 'Ativo'); // definir status como booleano
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onClose();
+        try {
+            const clientData = {name, email, job, rate: Number(rate), isactive: status}
+            await OnSubmit(clientData);
+            onClose();
+        } catch (error) {
+            console.error('Erro ao adicionar cliente', error)
+        }
     }
+
+    useEffect(() => {
+        if (mode === 'edit' && clientData) {
+            setName(clientData.name);
+            setEmail(clientData.email);
+            setJob(clientData.job);
+            setRate(clientData.rate);
+            setStatus(clientData.isActive);
+        } else {
+            setName('');
+            setEmail('');
+            setJob('');
+            setRate('');
+            setStatus(false);
+        }
+    }, [mode, clientData]);
 
     return (
         <>
