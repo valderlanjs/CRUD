@@ -37,5 +37,27 @@ Esse projeto foi desenvolvido pensando nas melhores práticas e padrões de dese
 6. Criar estrutura do projeto:
     - Criar a seguinte pasta para os componentes
 
-             /src/components/
-
+                CRUD/
+                  ├── crud-frontend/
+                  |         ├── src/
+                  |         |   ├── components
+                  |         |   |         ├──── ModalForm.jsx
+                  |         |   |         ├──── NavBar.jsx
+                  |         |   |         ├──── TableList.jsx
+                  |         |   ├── index.css
+                  |         |   ├── App.jsx
+                  |         |   ├── main.jsx
+                  |
+                  ├── crud-backend/
+                  |         ├── src/
+                  |         |     ├── controllers
+                  |         |     |      ├──── clientController.js
+                  |         |     |
+                  |         |     ├── routes
+                  |         |     |      ├──── clientRoute.js
+                  |         |     |
+                  |         |     ├── services
+                  |         |     |      ├──── clientServices.js
+                  |         |     |
+                  |         |     ├── db.js
+                  |         |     ├── index.js
