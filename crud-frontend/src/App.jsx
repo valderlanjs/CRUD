@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 import ModalForm from './components/Modalform'
 import NavBar from './components/NavBar'
 import TableList from './components/TableList'
