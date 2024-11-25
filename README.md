@@ -1,6 +1,7 @@
 # CRUD completo com Front-end e Back-end
 
 ### DESCRIÇÃO
+
 Este projeto implementa um CRUD (Create, Read, Update, Delete) completo para gerenciar clientes. Ele permite que os usuários adicionem, visualizem, editem e excluam registros de clientes, incluindo informações como nome, email e cargo. A aplicação também oferece uma funcionalidade de pesquisa que permite filtrar clientes por nome, email ou cargo.
 Esse projeto foi desenvolvido pensando nas melhores práticas e padrões de desenvolvimento para garantir um aplicativo robusto.
 

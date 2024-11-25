@@ -62,7 +62,7 @@ export default function ModalForm({ isOpen, onClose, mode, OnSubmit, clientData 
 
                         <div className="flex mb-4 justify-between my-4">
                             <label className="input input-bordered mr-4 my-4 flex items-center gap-2">
-                                Avaliação
+                                Salário
                                 <input type="number" className="grow" value={rate} onChange={(e) => setRate(e.target.value)}/>
                             </label>
                             <select value={status ? 'Ativo' : 'Inativo'} className="select select-bordered mt-4  w-full max-w-xs" onChange={handleStatusChange}>
